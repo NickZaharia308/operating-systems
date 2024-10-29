@@ -1,4 +1,4 @@
-BINARIES = race_condition race_condition_mutex
+BINARIES = race_condition_atomic race_condition_atomic2
 LDLIBS = -lpthread
 all: $(BINARIES)
 

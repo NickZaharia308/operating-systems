@@ -19,6 +19,7 @@ def worker(sem, id):
         print(f"Worker {id} started handling message...")
         sleep(randint(1, 5))
 
+        # Critical sections
         with msg_mutex:
             msg = messages[0]
             messages.pop(0)

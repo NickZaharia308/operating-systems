@@ -8,7 +8,7 @@
 
 #define NUM_ITER 10000000
 
-/* TODO 1: Add the `__thread` keyword to the declaration below. */
+/* TODO 1: Declare "var" static int variable and add the `__thread` keyword. */
 static __thread int var;
 
 void *increment_var(void *arg)
@@ -19,9 +19,10 @@ void *increment_var(void *arg)
 		var++;
 
 	/**
-	 * TODO 2: Print the value of `var` after it's incremented. Also print
+	 * Print the value of `var` after it's incremented. Also print
 	 * the ID of the thread. Use `pthread_self()` to get it.
 	 */
+	/* TODO 1: */
 	printf("[tid = %ld] var = %d; %p\n", pthread_self(), var, &var);
 
 	return NULL;
@@ -35,10 +36,10 @@ void *decrement_var(void *arg)
 		var--;
 
 	/**
-	 * TODO 2: Print the value of `var` after it's incremented. Also print
-	 * the
-	 * ID of the thread. Use `pthread_self()` to get it.
+	 * Print the value of `var` after it's incremented. Also print
+	 * the ID of the thread. Use `pthread_self()` to get it.
 	 */
+	/* TODO 1: */
 	printf("[tid = %ld] var = %d; %p\n", pthread_self(), var, &var);
 
 	return NULL;
@@ -50,9 +51,10 @@ int main(void)
 	pthread_t tids[2];
 
 	/**
-	 * TODO 3: Modify the value of `var` here and see if the threads record
+	 * Modify the value of `var` here and see if the threads record
 	 * this modification or not.
 	 */
+	/* TODO 1: */
 	var = 69;
 
 	rc = pthread_create(tids, NULL, increment_var, NULL);

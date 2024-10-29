@@ -13,15 +13,20 @@ def worker(event, id):
     msg = ""
 
     while True:
+        # TODO 1: Acquire the lock before accessing the shared resource (messages)
         event.acquire()
         while len(messages) == 0:
+            # TODO 1: Wait for a message to be available if the list is empty
             event.wait()
 
         print(f"Worker {id} started handling message...")
         sleep(randint(1, 5))
 
+        # TODO 2: Safely retrieve the message while holding the lock (use "msg")
         msg = messages[0]
         messages.pop(0)
+
+        # TODO 1: Release the lock after modifying the shared resource
         event.release()
 
         print(f"Worker {id} handling message: {msg}")
@@ -33,7 +38,7 @@ def worker(event, id):
 def main():
     event = Condition()
 
-    # Create and start the worker threads.
+    # Create and start the worker threads
     thread_pool = [Thread(target=worker, args=(event, i)) for i in range(NUM_WORKERS)]
     for t in thread_pool:
         t.daemon = True
@@ -49,9 +54,14 @@ def main():
         if msg == "exit":
             break
 
+        # TODO 1: Acquire the lock before appending a message to the list
         event.acquire()
+
+        # TODO 2: Append the message to "messages" and notify the workers that a message is available
         messages.append(msg)
         event.notify()
+
+        # TODO 1: Release the lock after writing (appending) in the shared resource
         event.release()
 
 
